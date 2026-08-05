@@ -1,0 +1,96 @@
+# =============================================================================
+# Purchase-Intent XAI — single source of truth for paths, params, and schema.
+# Every notebook, script, the API, and the dashboard load THIS file.
+# =============================================================================
+
+seed: 42
+
+paths:
+  raw_data: "dataset/ecommerce_sessions.csv"
+  data_dictionary: "dataset/data_dictionary.csv"
+  model_dir: "models"
+  model_artifact: "models/best_model.joblib"
+  preprocessor_artifact: "models/preprocessor.joblib"
+  feature_names_artifact: "models/feature_names.joblib"
+  explainer_artifact: "models/shap_explainer.joblib"
+  metrics_report: "models/metrics_report.json"
+  model_card: "docs/model_card.md"
+  mlruns_dir: "mlruns"
+
+data:
+  target: "Converted"
+  test_size: 0.2
+  val_size: 0.1          # carved out of the remaining train split, for threshold tuning
+  stratify: true
+
+  # int-coded columns that LOOK numeric but are categorical IDs (see PRD §2.2 watch-out)
+  categorical_id_columns:
+    - OperatingSystems
+    - Browser
+    - Region
+    - TrafficType
+
+  # genuinely categorical (string) columns
+  categorical_columns:
+    - Month
+    - VisitorType
+    - Weekend
+
+  # right-skewed numeric duration/count columns -> log1p + RobustScale
+  skewed_numeric_columns:
+    - Administrative
+    - Administrative_Duration
+    - Informational
+    - Informational_Duration
+    - ProductRelated
+    - ProductRelated_Duration
+    - BounceRates
+    - ExitRates
+    - PageValues
+    # engineered (src/features/engineering.py) — same right-skew profile as
+    # the raw counts/durations they're built from
+    - total_pages
+    - total_duration
+    - avg_time_per_page
+
+  # roughly-normal numeric columns -> RobustScale only (no log1p)
+  plain_numeric_columns:
+    - SpecialDay
+    # engineered ratios in [0,1] and a binary flag — no log transform needed
+    - product_page_share
+    - product_time_share
+    - is_returning_visitor
+
+  # Deployment-leakage decision (PRD §2.2 watch-out on PageValues):
+  # PageValues is computed from pages seen close to checkout and is not reliably
+  # known if you intend to score a session EARLY in its lifetime. We keep it in
+  # the default (offline/analytics) model because the brief's primary use case
+  # is a growth/CRO team scoring completed or near-complete sessions, but we
+  # ALSO train and report a `no_page_values` ablation model so the gap is
+  # documented rather than hidden. See docs/model_card.md.
+  use_page_values: true
+
+imbalance:
+  # Benchmarked strategies (see notebooks/03_modeling.ipynb): class_weight,
+  # SMOTE, and plain threshold tuning. class_weight='balanced' /
+  # scale_pos_weight is the default because it needs no synthetic sampling and
+  # performed as well as SMOTE on PR-AUC while being cheaper and leak-free by
+  # construction.
+  strategy: "class_weight"   # one of: class_weight | smote | none
+
+threshold:
+  # Business trade-off: value of a captured conversion vs. cost of the
+  # intervention it would trigger. Defaults are illustrative; tune per business.
+  value_per_conversion: 50.0
+  cost_per_intervention: 2.0
+
+models:
+  cv_folds: 5
+  scoring: "average_precision"   # PR-AUC — imbalance-aware, drives model selection
+
+api:
+  host: "0.0.0.0"
+  port: 8000
+
+dashboard:
+  port: 8501

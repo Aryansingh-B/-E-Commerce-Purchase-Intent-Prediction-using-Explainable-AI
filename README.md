@@ -73,7 +73,7 @@ first — see `docs/install_guide.md`).
 
 ```
 purchase-intent-xai/
-├─ dataset/            # ecommerce_sessions.csv + data_dictionary.csv
+├─ dataset/            #  ecommerce_sessions.csv + data_dictionary.csv
 ├─ notebooks/           # 01_eda, 02_features, 03_modeling, 04_xai
 ├─ src/
 │  ├─ config/           # config.yaml + typed pydantic settings loader

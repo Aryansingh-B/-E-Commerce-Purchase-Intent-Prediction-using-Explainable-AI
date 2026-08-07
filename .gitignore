@@ -1,14 +1,32 @@
 # Tells Git which files to ignore (not track in version control)
 
+# Python bytecode & caches
 __pycache__/
 *.py[cod]
+
+# Virtual environments
 .venv/
 venv/
+
+# Secrets / local config
 .env
+
+# Test & lint tool caches
 .pytest_cache/
 .ruff_cache/
+
+# Packaging
 *.egg-info/
+
+# ML experiment tracking
 mlruns/
+
+# Jupyter 
 .ipynb_checkpoints/
+
+#  OS files 
 .DS_Store
+
+# CatBoost 
 catboost_info/
+

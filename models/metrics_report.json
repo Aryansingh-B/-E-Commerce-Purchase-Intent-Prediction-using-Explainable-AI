@@ -1,0 +1,171 @@
+{
+  "best_model": "catboost",
+  "model_ranking_by_cv_pr_auc": [
+    "catboost",
+    "xgboost",
+    "lightgbm",
+    "random_forest",
+    "logistic_regression",
+    "decision_tree"
+  ],
+  "cv_results": {
+    "logistic_regression": {
+      "threshold": 0.5,
+      "accuracy": 0.8888541666666666,
+      "precision": 0.5938827527612575,
+      "recall": 0.9264413518886679,
+      "f1": 0.723789800673052,
+      "roc_auc": 0.9642628716638496,
+      "pr_auc": 0.8198341465283692,
+      "confusion_matrix": {
+        "tn": 7135,
+        "fp": 956,
+        "fn": 111,
+        "tp": 1398
+      }
+    },
+    "decision_tree": {
+      "threshold": 0.5,
+      "accuracy": 0.8814583333333333,
+      "precision": 0.5786350148367952,
+      "recall": 0.904572564612326,
+      "f1": 0.7057911065149949,
+      "roc_auc": 0.9484345113761055,
+      "pr_auc": 0.7984045886109514,
+      "confusion_matrix": {
+        "tn": 7097,
+        "fp": 994,
+        "fn": 144,
+        "tp": 1365
+      }
+    },
+    "random_forest": {
+      "threshold": 0.5,
+      "accuracy": 0.9188541666666666,
+      "precision": 0.7188249400479616,
+      "recall": 0.7945659377070908,
+      "f1": 0.7548001259049417,
+      "roc_auc": 0.9621643926250104,
+      "pr_auc": 0.8242827262225525,
+      "confusion_matrix": {
+        "tn": 7622,
+        "fp": 469,
+        "fn": 310,
+        "tp": 1199
+      }
+    },
+    "xgboost": {
+      "threshold": 0.5,
+      "accuracy": 0.9114583333333334,
+      "precision": 0.6717040125065138,
+      "recall": 0.854208084824387,
+      "f1": 0.7520420070011669,
+      "roc_auc": 0.965012258259449,
+      "pr_auc": 0.834811308492409,
+      "confusion_matrix": {
+        "tn": 7461,
+        "fp": 630,
+        "fn": 220,
+        "tp": 1289
+      }
+    },
+    "lightgbm": {
+      "threshold": 0.5,
+      "accuracy": 0.914375,
+      "precision": 0.6952814098919841,
+      "recall": 0.8104705102717031,
+      "f1": 0.7484700122399021,
+      "roc_auc": 0.9640029882092522,
+      "pr_auc": 0.8315592627261891,
+      "confusion_matrix": {
+        "tn": 7555,
+        "fp": 536,
+        "fn": 286,
+        "tp": 1223
+      }
+    },
+    "catboost": {
+      "threshold": 0.5,
+      "accuracy": 0.9058333333333334,
+      "precision": 0.6455026455026455,
+      "recall": 0.8893306825712393,
+      "f1": 0.7480490523968785,
+      "roc_auc": 0.9671022601670085,
+      "pr_auc": 0.8433692512236168,
+      "confusion_matrix": {
+        "tn": 7354,
+        "fp": 737,
+        "fn": 167,
+        "tp": 1342
+      }
+    }
+  },
+  "test_metrics_default_threshold_0.5": {
+    "threshold": 0.5,
+    "accuracy": 0.9108333333333334,
+    "precision": 0.6523364485981309,
+    "recall": 0.9257294429708223,
+    "f1": 0.7653508771929824,
+    "roc_auc": 0.9715132737445109,
+    "pr_auc": 0.8591873333320834,
+    "confusion_matrix": {
+      "tn": 1837,
+      "fp": 186,
+      "fn": 28,
+      "tp": 349
+    }
+  },
+  "test_metrics_chosen_threshold": {
+    "threshold": 0.024318471733367323,
+    "accuracy": 0.7954166666666667,
+    "precision": 0.4341801385681293,
+    "recall": 0.9973474801061007,
+    "f1": 0.6049879324215608,
+    "roc_auc": 0.9715132737445109,
+    "pr_auc": 0.8591873333320834,
+    "confusion_matrix": {
+      "tn": 1533,
+      "fp": 490,
+      "fn": 1,
+      "tp": 376
+    }
+  },
+  "chosen_threshold_info": {
+    "threshold": 0.024318471733367323,
+    "expected_value": 17068.0,
+    "true_positives": 376,
+    "false_positives": 490,
+    "interventions_triggered": 866,
+    "conversions_captured": 376,
+    "total_conversions": 377,
+    "precision_at_threshold": 0.4341801385681293,
+    "recall_at_threshold": 0.9973474801061007
+  },
+  "feature_columns": [
+    "Administrative",
+    "Administrative_Duration",
+    "Informational",
+    "Informational_Duration",
+    "ProductRelated",
+    "ProductRelated_Duration",
+    "BounceRates",
+    "ExitRates",
+    "PageValues",
+    "total_pages",
+    "total_duration",
+    "avg_time_per_page",
+    "SpecialDay",
+    "product_page_share",
+    "product_time_share",
+    "is_returning_visitor",
+    "OperatingSystems",
+    "Browser",
+    "Region",
+    "TrafficType",
+    "Month",
+    "VisitorType",
+    "Weekend"
+  ],
+  "n_train": 9600,
+  "n_test": 2400
+}

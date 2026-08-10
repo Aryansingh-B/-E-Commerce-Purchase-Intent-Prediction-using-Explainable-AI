@@ -4,7 +4,7 @@ pyyaml==6.0.2
 pydantic==2.9.2
 pydantic-settings==2.6.1
 
-# Data (Manipulation & Compution)
+# Data Manipulation & Mathamatical Computation
 pandas==2.2.3
 numpy==1.26.4
 

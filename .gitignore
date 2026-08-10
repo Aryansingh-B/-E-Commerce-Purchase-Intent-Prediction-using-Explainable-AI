@@ -1,4 +1,4 @@
-# Tells Git which files to ignore (not to track in version control)
+# Tells Git which files to ignore (not to track in Version Control)
 
 # Python bytecode & caches
 __pycache__/
